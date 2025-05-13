@@ -1,14 +1,15 @@
-FROM python:3.10-slim
+FROM nginx:alpine
 
-WORKDIR /app
+WORKDIR /usr/share/nginx/html
 
-COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+#COPY requirements.txt .
+#RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
 
-# Uygulamayı başlat
-CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "8000"]
+EXPOSE 80
+
+CMD ["nginx", "-g", "daemon off;"]
 
 #ENV NODE_ENV production
 
